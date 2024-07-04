@@ -7,15 +7,15 @@ class Window:
     self.__root.protocol("WM_DELETE_WINDOW", self.close)
     self.__canvas = Canvas(self.__root, bg="white", height=height, width=width)
     self.__canvas.pack(fill=BOTH, expand=1)
-    self.window_running = False
+    self.__running = False
 
   def redraw(self):
     self.__root.update_idletasks()
     self.__root.update()
 
   def wait_for_close(self):
-    self.window_running = True
-    while self.window_running:
+    self.__running = True
+    while self.__running:
       self.redraw()
     print("window closed...")
 
@@ -23,7 +23,7 @@ class Window:
     line.draw(self.__canvas, fill_color)
 
   def close(self):
-    self.window_running = False
+    self.__running = False
 
 
 
@@ -39,26 +39,3 @@ class Line:
 
   def draw(self, canvas, fill_color='black'):
     canvas.create_line(self.p1.x, self.p1.y, self.p2.x, self.p2.y, fill=fill_color, width=2)
-
-class Cell:
-  def __init__(
-      self,
-      x1,
-      x2,
-      y1,
-      y2,
-      window,
-      has_left_wall=True,
-      has_right_wall=True,
-      has_top_wall=True,
-      has_bottom_wall=True):
-    
-    self.has_left_wall = has_left_wall
-    self.has_right_wall = has_right_wall
-    self.has_top_wall = has_top_wall
-    self.has_bottom_wall = has_bottom_wall
-    self._x1 = x1
-    self._x2 = x2
-    self._y1 = y1
-    self._y2 = y2
-    self._win = window
