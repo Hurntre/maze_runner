@@ -6,6 +6,7 @@ class Cell:
     self.has_right_wall = True
     self.has_top_wall = True
     self.has_bottom_wall = True
+    self.visited = False
     self._x1 = None #top_left_corner
     self._x2 = None #bottom_right_corner
     self._y1 = None #top_left_corner
@@ -35,11 +36,9 @@ class Cell:
       self._win.draw_line(bottom_wall)
 
   def draw_move(self, to_cell, undo=False):
-    # half_length = abs(self._x2 - self._x1) // 2
     x_center = abs(self._x2 - self._x1) // 2 + self._x1
     y_center = abs(self._y2 - self._y1) // 2 + self._y1
 
-    # half_length2 = abs(to_cell._x2 - to_cell._x1) // 2
     x_center2 = abs(to_cell._x2 - to_cell._x1) + to_cell._x1
     y_center2 = abs(to_cell._y2 - to_cell._y1) + to_cell._y1
 
